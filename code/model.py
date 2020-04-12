@@ -41,7 +41,6 @@ rf_model = RandomForestRegressor(random_state=1)
 rf_model.fit(train_X,train_y)
 rf_val_predictions = rf_model.predict(val_X)
 rf_val_mae = mean_absolute_error(rf_val_predictions, val_y)
-
 print("validationo MAE for Random Forest Model: {:,.0f}".format(rf_val_mae))
 
 rf_model_on_full_data = RandomForestRegressor(random_state=1)
