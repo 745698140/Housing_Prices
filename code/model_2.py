@@ -6,6 +6,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import  OneHotEncoder
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error
+from sklearn.model_selection import cross_val_score
 
 categorical_divided_num = 10 #use to select low cardinality categorical columns
 randomforest_n_estimators = 250
@@ -65,3 +66,12 @@ clf.fit(X_train, y_train)
 preds = clf.predict(X_valid)
 
 print('MAE:', mean_absolute_error(y_valid, preds))
+
+#scores = -1 * cross_val_score(clf, X_full, y, cv=5, scoring='neg_mean_absolute_error')
+
+#print("Average MAE Score:", scores.mean())
+
+preds_test = clf.predict(X_test)
+
+output = pd.DataFrame({'Id': X_test.index, 'SalePrice':preds_test})
+output.to_csv('submission.csv', index=False)
